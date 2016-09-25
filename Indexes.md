@@ -62,3 +62,19 @@ socket.socket(socket.AFINET, socekt.SOCK_STREAM) # 创建一个基于 TCP 协议
 <[socekt]>.settimeout(<timeout>) # 设置超时时间
 ```
 
+## 处理 socket 错误
+- 所用函数
+
+```py
+import socket
+<[socket]>.sendall("a string".encode())  # Python 3 中发送数据需要 encode()
+
+import sys
+sys.exit(1)  # 退出程序
+
+import argparse
+argparse.ArgumentParser(description="description")  # 创建一个命令行参数配置
+<[argparse]>.add_argument()  # 添加参数
+given_args = <[argparse]>.parser.args() # 将用户输入的数据进行转换，后续可赋值到其他变量
+```
+
