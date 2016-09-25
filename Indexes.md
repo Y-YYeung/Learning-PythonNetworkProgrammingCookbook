@@ -62,7 +62,7 @@ socket.socket(socket.AFINET, socekt.SOCK_STREAM) # 创建一个基于 TCP 协议
 <[socekt]>.settimeout(<timeout>) # 设置超时时间
 ```
 
-## 处理 socket 错误
+## 处理 socket 错误 1.8
 - 所用函数
 
 ```py
@@ -77,4 +77,16 @@ argparse.ArgumentParser(description="description")  # 创建一个命令行参�
 <[argparse]>.add_argument()  # 添加参数
 given_args = <[argparse]>.parser.args() # 将用户输入的数据进行转换，后续可赋值到其他变量
 ```
+
+## 修改 socket 发送和接收缓冲区大小 1.9
+- 所用方法
+
+```py
+import socket
+
+# 参数分别为：常量符号（需要查），选项名称，值
+sock.getsockopt(<level>, <option name>)
+sock.setsockopt(<level>, <option name>, value)
+```
+
 
