@@ -88,5 +88,26 @@ import socket
 sock.getsockopt(<level>, <option name>)
 sock.setsockopt(<level>, <option name>, value)
 ```
+## 将 socket 改成阻塞式或非阻塞式 1.10
+- 所用方法
 
+```py
+import socket
+
+# 设置是否为阻塞式。True 为阻塞，False 为非阻塞
+<[socket]>.setblocking(<flag>)
+
+# 上述方法等同于调用
+<[socket]>.settimeout(None) # True
+<[socket]>.settimeout(0.0) # False
+
+# 绑定 socket，当端口为0时，系统自动从 1024~65535 之间选择可用的端口
+<[socket]>.bind(<IP:port as a tuple>)
+
+# 获取 socket 地址，特别是自动获取端口的时候有用
+<[socket]>.getsockname()
+
+# 监听，参数为在拒绝新连接前可接受的连接数
+<[socket]>.listen(<available connections>)
+```
 
