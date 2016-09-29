@@ -37,7 +37,7 @@ import socket
 socket.getservbyport(<port>, "<protocol name>") # 通过端口和协议名称，获取服务的名字 
 ```
 
-## 主机字节序和网络字节序之间相互转换 1.6
+## 1.6 主机字节序和网络字节序之间相互转换
 - 编写底层网络应用时，有时需要处理通过电缆在两台设备之间传送的底层数据。需要把主机操作系统发出的数据转换成网络格式或逆向转换
 - 所用函数
 
@@ -49,7 +49,7 @@ socket.htonl(data) # 主机字节序 -> 长整形网络字节序
 socket.ntohs(data) # 网络字节序 -> 短整形主机字节序
 socket.htons(data) # 主机字节序 -> 短整形网络字节序
 ```
-## 设定并获取默认的套接字超时时间 1.7
+## 1.7 设定并获取默认的套接字超时时间
 - 获取或设置套接字超时时间
 - 所用函数
 
@@ -62,7 +62,7 @@ socket.socket(socket.AFINET, socekt.SOCK_STREAM) # 创建一个基于 TCP 协议
 <[socekt]>.settimeout(<timeout>) # 设置超时时间
 ```
 
-## 处理 socket 错误 1.8
+## 1.8 处理 socket 错误
 - 所用函数
 
 ```py
@@ -78,7 +78,7 @@ argparse.ArgumentParser(description="description")  # 创建一个命令行参�
 given_args = <[argparse]>.parser.args() # 将用户输入的数据进行转换，后续可赋值到其他变量
 ```
 
-## 修改 socket 发送和接收缓冲区大小 1.9
+## 1.9 修改 socket 发送和接收缓冲区大小
 - 所用方法
 
 ```py
@@ -88,7 +88,7 @@ import socket
 sock.getsockopt(<level>, <option name>)
 sock.setsockopt(<level>, <option name>, value)
 ```
-## 将 socket 改成阻塞式或非阻塞式 1.10
+## 1.10 将 socket 改成阻塞式或非阻塞式
 - 所用方法
 
 ```py
@@ -110,4 +110,26 @@ import socket
 # 监听，参数为在拒绝新连接前可接受的连接数
 <[socket]>.listen(<available connections>)
 ```
+
+# 1.11 重用 socket 地址
+- 在某个端口上运行一个 Python socket 服务器，连接一次后终止运行，就不能再使用该端口，否则抛异常。为此，需要设置端口可重用来解决该问题
+- 所用方法
+
+```py
+import socket
+
+# 获取 socket 地址的旧状态
+[<socket>].getsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDER)
+
+# 设置 socket 地址可重用，其中的参数含义，需要以后深造
+[<socket>].setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+```
+
+- 原理
+	1. 此脚本为服务端脚本，运行脚本
+	- 利用 `telnet localhost 8282(脚本中定义的端口)` 连接到服务端
+	- 使用 `Ctrl-C` 终止服务端运行，再重启服务端，接下来的事就有趣了 
+	- 分情况
+		1. 服务端 **没有** 设置 socket 地址可重用，抛出异常，因为旧端口还没有释放
+		2. 服务端 **有** 设置 socket 地址可重用，正常启动
 
