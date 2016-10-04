@@ -135,3 +135,25 @@ import socket
 		1. 服务端 **没有** 设置 socket 地址可重用，抛出异常，因为旧端口还没有释放
 		2. 服务端 **有** 设置 socket 地址可重用，正常启动
 
+# 1.12 从网络时间服务器获取当前时间
+- 本地机器的时间可能不准确，从网络时间服务器获取更可靠
+- 原理
+	- 使用 ntplib，通过网络时间协议 Network Time Protocol a.k.a NTP 处理客户端和服务器之间的通信
+	- 需通过 pip 等工具安装 ntplib
+
+- 所用方法
+
+```py
+import ntplib
+# 创建一个 NTP 客户端
+ntp_client = ntplib.NTPClient()
+
+# 向 NTP 服务器发送请求并获得一个结果
+response = ntp_client.request("pool.ntp.org")
+
+from time import ctime
+# 转换时间
+ctime(<以秒表示的时间>)
+```
+
+
