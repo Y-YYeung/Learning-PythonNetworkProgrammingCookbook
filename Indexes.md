@@ -156,4 +156,10 @@ from time import ctime
 ctime(<以秒表示的时间>)
 ```
 
+## 1.13 编写 SNTP 客户端
+- Python 3 中，Integer 类型全都为 long
+
+```py
+t = struct.unpack() # 将二进制数据转换
+```
 
